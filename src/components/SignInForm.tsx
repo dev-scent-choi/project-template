@@ -5,13 +5,14 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { useState } from 'react';
 import { useTheme } from '@mui/material/styles';
-
+import { useNavigate } from 'react-router-dom';
 interface SignInFormProps {
   isSmallScreen: boolean;
   companyName: string;
 }
 export default function SignInForm({ isSmallScreen, companyName }: SignInFormProps) {
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   const handleClickShowPassword = () => setShowPassword((prev) => !prev);
 
@@ -22,6 +23,8 @@ export default function SignInForm({ isSmallScreen, companyName }: SignInFormPro
       email: data.get('email'),
       password: data.get('password'),
     });
+    
+    navigate('/dashboard');
   };
 
   return (

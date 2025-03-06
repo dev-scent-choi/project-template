@@ -1,17 +1,12 @@
-import { AppBar, Toolbar, IconButton, Typography } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
+import React from "react";
+import { AppBar, Toolbar, Typography, IconButton } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
 
-const Header = ({ onDrawerToggle }: { onDrawerToggle: () => void }) => {
+const Header: React.FC = () => {
   return (
-    <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+    <AppBar position="fixed" sx={{ width: { sm: `calc(100% - 240px)` }, ml: { sm: `240px` } }}>
       <Toolbar>
-        <IconButton
-          edge="start"
-          color="inherit"
-          aria-label="menu"
-          onClick={onDrawerToggle}
-          sx={{ mr: 2 }}
-        >
+        <IconButton color="inherit" edge="start" sx={{ mr: 2, display: { sm: "none" } }}>
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" noWrap>

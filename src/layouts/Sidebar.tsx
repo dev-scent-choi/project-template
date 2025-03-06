@@ -1,34 +1,32 @@
-import { Drawer, List, ListItem, ListItemIcon, ListItemText, ListItemButton } from '@mui/material';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+import React from "react";
+import { Box, Drawer, List, ListItem, ListItemText, Toolbar } from "@mui/material";
 
 const drawerWidth = 240;
 
-const Sidebar = ({ open, onDrawerToggle }: { open: boolean; onDrawerToggle: () => void }) => {
-  return (
-    <Drawer
-      variant="temporary"
-      open={open}
-      onClose={onDrawerToggle}
-      ModalProps={{
-        keepMounted: true, // Better open performance on mobile.
-      }}
-      sx={{
-        display: { xs: 'block', sm: 'none' },
-        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
-      }}
-    >
+const Sidebar: React.FC = () => {
+  const drawer = (
+    <Box sx={{ width: drawerWidth }}>
+      <Toolbar />
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton onClick={onDrawerToggle}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
+        {["Dashboard", "Files", "Analytics", "Settings"].map((text) => (
+          <ListItem button key={text}>
+            <ListItemText primary={text} />
           </ListItem>
         ))}
       </List>
-    </Drawer>
+    </Box>
+  );
+
+  return (
+    <Box component="nav" sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}>
+      <Drawer
+        variant="permanent"
+        sx={{ display: { xs: "none", sm: "block" }, "& .MuiDrawer-paper": { width: drawerWidth } }}
+        open
+      >
+        {drawer}
+      </Drawer>
+    </Box>
   );
 };
 
